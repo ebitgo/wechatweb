@@ -268,6 +268,9 @@ var BCAccountId = {
             case MANAGE_DATA_TYPE:
                 formatManageDataOperationEx(o,mLanguage);
                 break;
+            case INFLATION_TYPE:
+                formatInflationOperationEx(o,mLanguage);
+                break;
             default :
                 console.log(o.Type);
         }

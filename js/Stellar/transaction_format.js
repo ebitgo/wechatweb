@@ -433,3 +433,32 @@ function formatManageDataOperationEx(opera,lang){
     }
     return opera;
 }
+
+
+function formatInflationOperationEx(opera,lang){
+    formatInflationOperation.apply(this,arguments);
+    rParam = '&l=' + mLanguage + '&' + randomParam();
+    baseDetails = opera.Details;
+    opera.addrTitle = SubString(opera.TransSourceAccount,5,5);
+    if(lang == 'cn') {
+        opera.Details = "日期/时间:<br>&gt; " + getLocalDateTimeString(opera.created_datetime,true,lang) + "<br>";
+        opera.Details += '发起账户:<br>&gt; <a href="accountid.html?addr=' + opera.TransSourceAccount + rParam + '">' + opera.TransSourceAccount + '</a>';
+        opera.Details += "<br>" + baseDetails;
+        opera.Title = "通胀";
+        opera.Details += "<br>Fee:<br>&gt; " + opera.fee_paid;
+        opera.Details += "<br>Memo( " + opera.memodef.memo_type + " ):<br>&gt; " + opera.memodef.memo;
+    }else{
+        opera.Details = "Date/Time:<br>&gt; " + getLocalDateTimeString(opera.created_datetime,true,lang) + "<br>";
+        opera.Details += 'Transaction Account:<br>&gt; <a href="accountid.html?addr=' + opera.TransSourceAccount + rParam + '">' + opera.TransSourceAccount + '</a>';
+        opera.Details += "<br>" + baseDetails;
+        opera.Title = "Inflation";
+        opera.Details += "<br>Fee:<br>&gt; " + opera.fee_paid;
+        opera.Details += "<br>Memo( " + opera.memodef.memo_type + " ):<br>&gt; " + opera.memodef.memo;
+    }
+    if(opera.SourceAccAmount == -1) {
+        opera.subTitle = opera.inflationsAmount;
+    } else {
+        opera.subTitle = opera.SourceAccAmount;
+    }
+    return opera;
+}

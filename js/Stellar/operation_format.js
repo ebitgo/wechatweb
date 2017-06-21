@@ -659,3 +659,33 @@ function formatManageDataOperation(opera,lang){
     opera.DetailRows += 8;
     return opera;
 }
+
+function formatInflationOperation(opera,lang){
+    opera.DetailRows = 4;
+    rParam = '&l=' + mLanguage + '&' + randomParam();
+    if(lang == 'cn'){
+        opera.Details = '源账户:<br>&gt; <a href="accountid.html?addr=' + opera.SourceAccount + rParam + '">' + opera.SourceAccount + '</a>';
+        opera.Details += '<br>Hash:<br>&gt; <a href="transaction.html?hash=' + opera.Hash + rParam + '">' + opera.Hash + '</a>';
+
+        opera.Title = "通胀";
+        for(var idx = 0; idx < opera.inflations.length ; idx++) {
+            opera.Details += '<br> [' + (idx+1) + '] :<br> ';
+            opera.Details += '&gt; 目标地址 : <a href="accountid.html?addr=' + opera.inflations[idx].Destination + rParam + '">' + opera.inflations[idx].Destination + '</a><br>';
+            opera.Details += '&gt; 发放金额 : ' + opera.inflations[idx].Amount + '<br>';
+        }
+        opera.Details += "<br>金额总和:<br>&gt; " + opera.inflationsAmount;
+    }else{
+        opera.Details = 'Source Account:<br>&gt; <a href="accountid.html?addr=' + opera.SourceAccount + rParam + '">' + opera.SourceAccount + '</a>';
+        opera.Details += '<br>Hash:<br>&gt; <a href="transaction.html?hash=' + opera.Hash + rParam + '">' + opera.Hash + '</a>';
+
+        opera.Title = "Inflation";
+        for(var idx = 0; idx < opera.inflations.length ; idx++) {
+            opera.Details += '<br> [' + (idx+1) + '] :<br>';
+            opera.Details += '&gt; Destination : <a href="accountid.html?addr=' + opera.inflations[idx].Destination + rParam + '">' + opera.inflations[idx].Destination + '</a><br>';
+            opera.Details += '&gt; Amount : ' + opera.inflations[idx].Amount + '<br>';
+        }
+        opera.Details += "<br>Sum Amount:<br>&gt; " + opera.inflationsAmount;
+    }
+    opera.DetailRows += 4;
+    return opera;
+}

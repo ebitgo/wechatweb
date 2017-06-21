@@ -290,3 +290,15 @@ var ManageDataOperation = function(mainAddr) {
         this.Type = MANAGE_DATA_TYPE;
     }
 };
+
+var INFLATION_TYPE = 'inflation_type';
+
+var InflationOperation = function(mainAddr) {
+    BaseOperation.apply(this,arguments);
+    this.Value = "";
+
+    this.DecodeBody = function(body){
+        this.BaseDecodeBody(body);
+        this.Type = INFLATION_TYPE;
+    }
+};

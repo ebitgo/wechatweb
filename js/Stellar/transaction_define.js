@@ -173,7 +173,7 @@ var MergeOperationEx = function(mainAddr){
     this.showDetails = false;
 
     this.DecodeBody = function(body,trans){
-        console.log(body);
+        //console.log(body);
         this.created_datetime = trans.created_at;
         this.fee_paid = trans.fee_paid;
         this.memodef.memo = trans.memodef.memo;
@@ -204,7 +204,7 @@ var MergeOperationEx = function(mainAddr){
         }else if(this.Account == this.MainAddress){
             this.SubType = MERGE_DESTROY;
         }
-        console.log(this);
+        //console.log(this);
     }
 };
 
@@ -688,6 +688,78 @@ var ManageDataOperationEx = function(mainAddr) {
     }
 };
 
+var InflationOperationEx = function(mainAddr) {
+    InflationOperation.apply(this,arguments);
+    this.created_datetime = "";
+    this.TransSourceAccount = "";
+    this.fee_paid = "";
+    this.memodef = {
+        memo:"",
+        memo_type:"",
+    };
+    this.source_account_sequence = 0;
+    this.subTitle = "";
+    this.addrTitle = "";
+    this.inflations = [];
+    this.inflationsAmount = 0;
+    this.SourceAccAmount = -1;
+
+    this.DecodeBody = function(body,trans) {
+        this.created_datetime = trans.created_at;
+        this.fee_paid = trans.fee_paid;
+        this.memodef.memo = trans.memodef.memo;
+        this.memodef.memo_type = trans.memodef.memo_type;
+        this.TransSourceAccount = trans.source_account;
+        this.Hash = trans.hash;
+        this.source_account_sequence = trans.source_account_sequence;
+        this.Type = INFLATION_TYPE;
+
+        if (body._attributes.sourceAccount != null && body._attributes.sourceAccount != undefined) {
+            if (body._attributes.sourceAccount._arm == "ed25519") {
+                this.SourceAccount = StellarSdk.encodeCheck("accountId", body._attributes.sourceAccount._value);
+            }
+        }
+        obj = StellarSdk.xdr.TransactionResult.fromXDR(trans.result_xdr, 'base64');
+
+        if (obj._attributes.result._value != null && obj._attributes.result._value.length > 0) {
+            result = obj._attributes.result._value[0];
+            if(result._value._value._value != null) {
+                vals = result._value._value._value;
+                for( var idx = 0 ; idx < vals.length ; idx++) {
+                    tmp = {};
+                    if(vals[idx]._attributes.destination != null) {
+                        tmp.Destination = StellarSdk.encodeCheck("accountId", vals[idx]._attributes.destination._value);
+                    }
+
+                    if(vals[idx]._attributes.amount != null) {
+                        high = vals[idx]._attributes.amount.high;
+                        low = vals[idx]._attributes.amount.low;
+                        if(high < 0){
+                            high += 4294967296;
+                        }
+                        if(low < 0){
+                            low += 4294967296;
+                        }
+                        value = (high*4294967296+low)/10000000.0;
+                        this.inflationsAmount += value;
+                        if(mainAddr == tmp.Destination) {
+                            this.SourceAccAmount = value;
+                        }
+                        tmp.Amount = ""+value;
+                    }
+
+                    this.inflations[this.inflations.length] = tmp;
+                }
+            }
+            //console.log('result_xdr ==============');
+            //console.log(this.inflations);
+        }
+        if (this.SourceAccount == '' || this.SourceAccount == undefined) {
+            this.SourceAccount = this.TransSourceAccount;
+        }
+    };
+};
+
 var BaseTransactionDef = function(main){
     this.id = "";
     this.created_at = "";
@@ -704,6 +776,7 @@ var BaseTransactionDef = function(main){
     this.ledger = 0;
     this.operation_count = 0;
     this.envelope_xdr = "";
+    this.result_xdr = "";
 
     this.DecodeBody = function(body){
         this.id = body.id;
@@ -716,6 +789,7 @@ var BaseTransactionDef = function(main){
         this.paging_token = body.paging_token*1;
         this.ledger = body.ledger;
         this.envelope_xdr = body.envelope_xdr;
+        this.result_xdr = body.result_xdr;
         this.memodef.memo_type = body.memo_type;
         if(this.memodef.memo_type != "none"){
             this.memodef.memo = body.memo;
@@ -796,6 +870,10 @@ var BaseTransactionDef = function(main){
                         break;
                     case "manageDatum":
                         ret[i] = new ManageDataOperationEx(this.mainAddr);
+                        ret[i].DecodeBody(operater,this);
+                        break;
+                    case "inflation":
+                        ret[i] = new InflationOperationEx(this.mainAddr);
                         ret[i].DecodeBody(operater,this);
                         break;
                     default :
