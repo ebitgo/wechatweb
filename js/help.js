@@ -38,6 +38,8 @@ var HelpIndex = {
             this.uiViews.id_help_cmd_blockchain_memo = "在微信公众号输入框中输入“blockchain”或“bc”或“区块浏览”或“qkll”并发送，公众号会返回一个区块链浏览链接，点击链接进入区块链浏览页面。";
             this.uiViews.id_help_cmd_history_cap = "历史查询";
             this.uiViews.id_help_cmd_history_memo = "在微信公众号输入框中输入“history”或“历史”或“ls”并发送，公众号会返回一个账户历史查询链接，点击链接进入账户历史查询页面。";
+            this.uiViews.id_help_cmd_quote_cap = "行情查询";
+            this.uiViews.id_help_cmd_quote_memo = "在微信公众号输入框中输入“quote”或“行情”或“hq”并发送，公众号会返回一个恒星币主要交易所行情查询链接，点击链接进入行情查询页面。";
             this.uiViews.err_server_data_invalid = "你的网络连接出现问题或者你所使用的连接已经超时，请从公众号重新发起请求。";
         } else {
             this.uiViews.id_help_heading_cap = "Help";
@@ -54,6 +56,8 @@ var HelpIndex = {
             this.uiViews.id_help_cmd_blockchain_memo = 'Enter "blockchain" or "bc" in the LumenStar subscription input box and send it. The LumenStar subscription will return a block chain explorer link for the user. Click the help link to enter the block chain explorer interface.';
             this.uiViews.id_help_cmd_history_cap = "User History";
             this.uiViews.id_help_cmd_history_memo = 'Enter "history" or "ls" in the LumenStar subscription input box and send it. The LumenStar subscription will return a history link for the user. Click the help link to enter the history interface.';
+            this.uiViews.id_help_cmd_quote_cap = 'Quote';
+            this.uiViews.id_help_cmd_quote_memo = 'Enter "quote" or "hq" in the LumenStar subscription input box and send it. The LumenStar subscription will return a xlm of quote link for the user. Click the quote link to enter the quote interface.';
             this.uiViews.err_server_data_invalid = "Your network connection has problems or your connection has timed out, please restart the request from the subscription.";
         }
     },
@@ -79,6 +83,8 @@ var HelpIndex = {
         $('#id_help_cmd_blockchain_memo')[0].innerText = this.uiViews.id_help_cmd_blockchain_memo;
         $('#id_help_cmd_history_cap')[0].innerText = this.uiViews.id_help_cmd_history_cap;
         $('#id_help_cmd_history_memo')[0].innerText = this.uiViews.id_help_cmd_history_memo;
+        $('#id_help_cmd_quote_cap')[0].innerText = this.uiViews.id_help_cmd_quote_cap;
+        $('#id_help_cmd_quote_memo')[0].innerText = this.uiViews.id_help_cmd_quote_memo;
     },
 
     threadCheck : function() {
