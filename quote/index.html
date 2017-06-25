@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotes Info - eBitGo service</title>
+    <link rel="icon" type="image/GIF" href="../Images/logo.jpg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta name="description" content="eBitGo 微信服务">
+    <meta name="keywords" content="eBitGo 钱包 微信 wallet Ledger cn stellar XLM Lumens 恒星币 流明币 设计 总账 账户 恒星货币 STR 在线">
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="../css/bootstrap.min.css"/>-->
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="../css/font-awesome.min.css"/>-->
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="../js/commom.js"></script>
+    <script src="../js/getUrlParam.js"></script>
+    <script src="../js/quote_index.js"></script>
+</head>
+<body>
+    <!--<div class="panel">-->
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <p><label id="quote_updated_time"></label> <i class="pull-right" onclick="QIndex.refreshBtnClick()"><i id="quote_refresh_btn_cap"></i> <i id="quote_refresh_btn" class="fa fa-refresh fa-2x"></i></i></p>
+            </div>
+        </div>
+        <table class="table table-hover table-condensed" id="quote_id_table">
+            <!--<tbody>-->
+                <!--<tr>-->
+                   <!--<td class="text-center" colspan="2" style="background-color: #28a4c9">-->
+                       <!--<h4>Btc38 价格</h4>-->
+                   <!--</td>-->
+                <!--</tr>-->
+                <!--<tr style="background-color: #9acfea">-->
+                    <!--<td class="text-center">-->
+                        <!--<label>Buy (CNY)</label>-->
+                    <!--</td>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>Sell(CNY)</label>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3111</label>-->
+                    <!--</td>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3222</label>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3111</label>-->
+                    <!--</td>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3222</label>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3111</label>-->
+                    <!--</td>-->
+                    <!--<td class="text-center">-->
+                        <!--<label>0.3222</label>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="text-center" colspan="2">Latest transaction price : 0.3444</td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        </table>
+    <!--</div>-->
+
+    <script>
+        QIndex.initController();
+    </script>
+</body>
+</html>
