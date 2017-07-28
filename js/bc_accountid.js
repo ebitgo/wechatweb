@@ -37,6 +37,14 @@ var BCAccountId = {
             this.uiViews.id_accid_trans_head_cap = '账户历史';
             this.uiViews.id_accid_trans_prev_btn = ' << 前一页';
             this.uiViews.id_accid_trans_next_btn = '下一页 >> ';
+            this.uiViews.acc_balance_xlm_cap = '余额 (XLM) :';
+            this.uiViews.acc_balance_cap = '余额: ';
+            this.uiViews.acc_sequence_cap = '发送序号 :';
+            this.uiViews.acc_homedomain_cap = '主域名 :';
+            this.uiViews.acc_inflation_cap = '通胀地址 :';
+            this.uiViews.acc_flags_cap = '标识 :';
+            this.uiViews.acc_thresholds_cap = '门限 :';
+            this.uiViews.acc_issuer_cap = '网关 :';
         } else {
             this.uiViews.id_accid_input_addr_head_cap = 'Input Account ID';
             this.uiViews.id_accid_input_addr_cap = 'Enter Account ID for query';
@@ -45,6 +53,14 @@ var BCAccountId = {
             this.uiViews.id_accid_trans_head_cap = 'History';
             this.uiViews.id_accid_trans_prev_btn = ' << Prev';
             this.uiViews.id_accid_trans_next_btn = 'Next >> ';
+            this.uiViews.acc_balance_xlm_cap = 'Balance (XLM) :';
+            this.uiViews.acc_balance_cap = 'Balance: ';
+            this.uiViews.acc_sequence_cap = 'Sequence :';
+            this.uiViews.acc_homedomain_cap = 'Home Domain :';
+            this.uiViews.acc_inflation_cap = 'Inflation :';
+            this.uiViews.acc_flags_cap = 'Flags :';
+            this.uiViews.acc_thresholds_cap = 'Thresholds :';
+            this.uiViews.acc_issuer_cap = 'Issuer :';
         }
     },
 
@@ -106,15 +122,15 @@ var BCAccountId = {
 
     updateUserInfoTable : function() {
         rtimer = randomParam();
-        c = '<tr><td colspan="2"><p style="word-wrap: break-word; word-break: break-all"><strong>Balance(XLM) :</strong> ' + this.userInfo.LumensBalance + '</p></td></tr>';
-        c = c + '<tr><td colspan="2"><strong>Sequence :</strong> ' + this.userInfo.Sequence + '</td></tr>';
-        c = c + '<tr><td colspan="2"><strong>Home Domain :</strong> ' + this.userInfo.HomeDomain + '</td></tr>';
-        c = c + '<tr><td colspan="2"><strong>Inflation :</strong> ' + this.userInfo.InflationDest + '</td></tr>';
-        c = c + '<tr><td colspan="2"><strong>Flags :</strong> required(' + this.userInfo.Flags.Auth_required + ') revocable(' + this.userInfo.Flags.Auth_revocable + ')</td></tr>';
-        c = c + '<tr><td colspan="2"><strong>Thresholds :</strong> high(' + this.userInfo.Thresholds.high + ') med(' + this.userInfo.Thresholds.med + ') low(' + this.userInfo.Thresholds.low + ')</td></tr>';
+        c = '<tr><td colspan="2"><p style="word-wrap: break-word; word-break: break-all"><strong>' + this.uiViews.acc_balance_xlm_cap + '</strong> ' + this.userInfo.LumensBalance + '</p></td></tr>';
+        c = c + '<tr><td colspan="2"><strong>' + this.uiViews.acc_sequence_cap + '</strong> ' + this.userInfo.Sequence + '</td></tr>';
+        c = c + '<tr><td colspan="2"><strong>' + this.uiViews.acc_homedomain_cap + '</strong> ' + this.userInfo.HomeDomain + '</td></tr>';
+        c = c + '<tr><td colspan="2"><p style="word-wrap: break-word; word-break: break-all"><strong>' + this.uiViews.acc_inflation_cap + '</strong> <a href="accountid.html?addr=' + this.userInfo.InflationDest + '&l=' + mLanguage + '&' + rtimer + '">' + this.userInfo.InflationDest + '</a></p></td></tr>';
+        c = c + '<tr><td colspan="2"><strong>' + this.uiViews.acc_flags_cap + '</strong> required(' + this.userInfo.Flags.Auth_required + ') revocable(' + this.userInfo.Flags.Auth_revocable + ')</td></tr>';
+        c = c + '<tr><td colspan="2"><strong>' + this.uiViews.acc_thresholds_cap + '</strong> high(' + this.userInfo.Thresholds.high + ') med(' + this.userInfo.Thresholds.med + ') low(' + this.userInfo.Thresholds.low + ')</td></tr>';
         for(var idx = 1 ; idx < this.userInfo.Credits.length; idx++) {
-            c = c + '<tr><td rowspan="2"><strong>' + this.userInfo.Credits[idx].asset_code + '</strong></td><td><strong>Balance:</strong> ' + this.userInfo.Credits[idx].balance + '</td></tr>';
-            c = c + '<tr><td><p style="word-wrap: break-word; word-break: break-all"><strong>Issuer:</strong> <a href="accountid.html?addr=' + this.userInfo.Credits[idx].issuer + '&l=' + mLanguage + '&' + rtimer + '">' + this.userInfo.Credits[idx].issuer + '</a></p></td></tr>';
+            c = c + '<tr><td rowspan="2"><strong>' + this.userInfo.Credits[idx].asset_code + '</strong></td><td><strong>' + this.uiViews.acc_balance_cap + '</strong> ' + this.userInfo.Credits[idx].balance + '</td></tr>';
+            c = c + '<tr><td><p style="word-wrap: break-word; word-break: break-all"><strong>' + this.uiViews.acc_issuer_cap + '</strong> <a href="accountid.html?addr=' + this.userInfo.Credits[idx].issuer + '&l=' + mLanguage + '&' + rtimer + '">' + this.userInfo.Credits[idx].issuer + '</a></p></td></tr>';
         }
         for(var idx = 0 ; idx < this.userInfo.Signers.length ; idx++) {
             c = c + '<tr><td rowspan="2"><p style="word-wrap: break-word; word-break: break-all">SIGNER' + (idx+1) + '</p></td><td><strong>Weight :</strong> ' + this.userInfo.Signers[idx].weight + '</td></tr>';

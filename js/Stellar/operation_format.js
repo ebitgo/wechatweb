@@ -393,7 +393,7 @@ function formatSetOptionsOperation(opera,lang){
             opera.Title += "签名权重;";
         }
         if(opera.InflationDest != null && opera.InflationDest != undefined && opera.InflationDest != ""){
-            opera.Details += "<br>通胀地址:<br>&gt; " + opera.InflationDest;
+            opera.Details += '<br>通胀地址:<br>&gt; <a href="accountid.html?addr=' + opera.InflationDest + rParam + '">' + opera.InflationDest + '</a>';
             opera.DetailRows += 2;
             opera.Title += "通胀地址;";
             opera.subTitle += '通胀 ';
