@@ -83,7 +83,7 @@ var BCAccountId = {
         this.accHistoryTable.innerHTML = '';
         this.accInfoRefresh = $("#id_accid_info_head_refresh")[0];
         this.accTransRefresh = $('#id_accid_trans_head_refresh')[0];
-        this.transactionUrl = StellarCurrentNetworkUrl + StellarAccounts + '/' + BCAccountId.curAddress + StellarTransactions;
+        this.transactionUrl = StellarAccounts + '/' + BCAccountId.curAddress + StellarTransactions;
         this.currParameter = BCAccountId.transactionUrl + '?limit=10&order=desc';
 
         $("#id_accid_input_addr_head_cap")[0].innerText = this.uiViews.id_accid_input_addr_head_cap;
@@ -93,6 +93,7 @@ var BCAccountId = {
         $("#id_accid_trans_head_cap")[0].innerText = this.uiViews.id_accid_trans_head_cap;
         $("#id_accid_trans_prev_btn")[0].innerText = this.uiViews.id_accid_trans_prev_btn;
         $("#id_accid_trans_next_btn")[0].innerText = this.uiViews.id_accid_trans_next_btn;
+        getServerParam($('#id_change_server_btn_cap'));
     },
 
     refreshUserInfo : function() {
@@ -153,7 +154,7 @@ var BCAccountId = {
 
         var hisUrl = "";
         if(flag == 'current') {
-            hisUrl = BCAccountId.currParameter;
+            hisUrl = StellarCurrentNetworkUrl + BCAccountId.currParameter;
         } else if (flag == 'next') {
             hisUrl = BCAccountId.nextParameter;
         } else {

@@ -14,12 +14,14 @@
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="../css/font-awesome.min.css"/>-->
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/stellar-sdk/0.6.2/stellar-sdk.min.js"></script>
     <script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/core-min.js"></script>
     <script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/enc-base64-min.js"></script>
 
-    <script src="../js/commom.js"></script>
     <script src="../js/getUrlParam.js"></script>
+    <script src="../js/commom.js"></script>
     <script src="../js/arraylist.js"></script>
     <script src="../js/Stellar/operation_define.js"></script>
     <script src="../js/Stellar/transaction_define.js"></script>
@@ -37,6 +39,19 @@
                     <i class="btn" onclick="ShoworHideBody('id_trans_input_addr_head_icon','id_trans_input_addr_body_div')">
                         <i class="fa fa-caret-down" id="id_trans_input_addr_head_icon">&nbsp;&nbsp;</i>
                         <i id="id_trans_input_addr_head_cap"></i>
+                    </i>
+                    <i>
+                        <div class="btn-group">
+                            <button id="id_change_server_btn_cap" type="button" class="btn btn-primary">stellar.org</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="changeServerClick($('#id_change_server_btn_cap'),'stellar.org');">stellar.org</a></li>
+                                <li><a onclick="changeServerClick($('#id_change_server_btn_cap'),'chinastellar.com');">chinastellar.com</a></li>
+                            </ul>
+                        </div>
                     </i>
                     <i class="btn pull-right" onclick="parent.location = 'index.html?l='+mLanguage;"><i class="fa fa-home fa-2x"></i></i>
                 </h5>
@@ -76,7 +91,7 @@
                         <i class="fa fa-caret-down" id="id_trans_info_head_icon">&nbsp;&nbsp;</i>
                         <i id="id_trans_info_head_cap"></i>
                     </i>
-                    <i class="btn pull-right" onclick=""><i class="fa fa-refresh fa-2x" id="id_trans_info_head_refresh"></i></i>
+                    <i class="btn pull-right" onclick="BCTransaction.refreshClick();"><i class="fa fa-refresh fa-2x" id="id_trans_info_head_refresh"></i></i>
                 </h5>
             </div>
             <div class="panel-body" id="id_trans_info_body_div">

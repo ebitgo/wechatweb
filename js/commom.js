@@ -38,12 +38,13 @@ var mAddress = "";
 function setStellarNetwork(nw) {
     if(nw == 'LIVE') {
         StellarSdk.Network.usePublicNetwork();
-        StellarCurrentNetworkUrl = StellarLiveNetworkUrlFly;
+        //StellarCurrentNetworkUrl = StellarLiveNetworkUrl;
     } else {
         StellarSdk.Network.useTestNetwork();
-        StellarCurrentNetworkUrl = StellarTestNetworkUrl;
+        //StellarCurrentNetworkUrl = StellarTestNetworkUrl;
     }
 }
+
 function clearInput(inputid) {
     $("#"+inputid).val('');
 }
@@ -182,4 +183,42 @@ function randomWord(randomFlag, min, max){
         str += arr[pos];
     }
     return str;
+}
+
+function changeServerClick(obj, title) {
+    if(obj == null) {
+        return;
+    }
+    obj.text(title);
+    if(title == 'stellar.org') {
+        StellarCurrentNetworkUrl = StellarLiveNetworkUrl;
+        $.cookie('serv',0, {path:'/', expires: 10});
+    } else if(title == 'chinastellar.com'){
+        StellarCurrentNetworkUrl = StellarLiveNetworkUrlFly;
+        $.cookie('serv',1, {path:'/', expires: 10});
+    }
+}
+
+function getServerParam(obj) {
+    serv = getUrlParam('serv');
+    if(serv == null || serv == '' || serv == undefined) {
+        serv = $.cookie("serv");
+    }
+    if(serv == null || serv == '' || serv == undefined) {
+        serv = 1;
+    } else {
+        if(serv == 0) {
+            StellarCurrentNetworkUrl = StellarLiveNetworkUrl;
+            if(obj != null) {
+                obj.text('stellar.org')
+            }
+        } else if(serv == 1) {
+            StellarCurrentNetworkUrl = StellarLiveNetworkUrlFly;
+            if(obj != null) {
+                obj.text('chinastellar.org')
+            }
+        }
+    }
+
+    $.cookie('serv',serv, {path:'/', expires: 10});
 }

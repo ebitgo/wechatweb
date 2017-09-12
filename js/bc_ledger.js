@@ -60,6 +60,7 @@ var BCLedger = {
         $("#id_ledger_head_cap")[0].innerText = this.uiViews.id_ledger_head_cap;
         $("#id_ledger_footer_prev_btn")[0].innerText = this.uiViews.id_ledger_footer_prev_btn;
         $("#id_ledger_footer_next_btn")[0].innerText = this.uiViews.id_ledger_footer_next_btn;
+        getServerParam($('#id_change_server_btn_cap'));
     },
 
     refreshClick : function() {

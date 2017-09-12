@@ -54,6 +54,7 @@ var BCTransaction = {
         $("#id_trans_input_addr_cap")[0].innerText = this.uiViews.id_trans_input_addr_cap;
         $("#id_trans_input_addr_memo")[0].innerText = this.uiViews.id_trans_input_addr_memo;
         $("#id_trans_info_head_cap")[0].innerText = this.uiViews.id_trans_info_head_cap;
+        getServerParam($('#id_change_server_btn_cap'));
     },
 
     reload : function() {

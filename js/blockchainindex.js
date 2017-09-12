@@ -68,6 +68,7 @@ var BlockChainIndex = {
         $("#id_blockchain_input_addr_memo")[0].innerText = this.uiViews.id_blockchain_input_addr_memo;
         $("#id_blockchain_ledger_head_cap")[0].innerText = this.uiViews.id_blockchain_ledger_head_cap;
         $("#id_blockchain_trans_head_cap")[0].innerText = this.uiViews.id_blockchain_trans_head_cap;
+        getServerParam($('#id_change_server_btn_cap'));
     },
 
     ledgerThread : function () {
